@@ -1,0 +1,539 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Inscrição | Povar</title>
+<meta name="description" content="Inscrição em sessões e formações da Povar.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#F5F4F1" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0A0A0E" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="logo.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="preload" href="monroe-bold.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+@font-face { font-family: "Monroe"; src: url("monroe-bold.woff2") format("woff2"); font-weight: 600; font-style: normal; font-display: swap; }
+@font-face { font-family: "Monroe"; src: url("monroe-light.woff2") format("woff2"); font-weight: 300; font-style: normal; font-display: swap; }
+
+:root {
+  --bg: #F5F4F1;
+  --surface: #FFFFFF;
+  --surface-2: #F0EFF5;
+  --border: rgba(100, 90, 130, 0.10);
+  --border-pill: rgba(100, 90, 130, 0.18);
+  --border-hover: rgba(100, 90, 130, 0.35);
+  --ink: #1A1028;
+  --body: #6B6878;
+  --muted: #9B9BAA;
+  --hint: #C0BDC9;
+  --v-500: #7C3AED;
+  --v-600: #7C3AED;
+  --green: #059669;
+  --red: #DC2626;
+  --dp-bg: #1A1028;
+  --dp-text: rgba(196, 179, 240, 0.55);
+  --dp-value: #FFFFFF;
+  --dp-border-row: rgba(255, 255, 255, 0.08);
+  --focus: rgba(124, 58, 237, 0.40);
+  --r-md: 6px;
+  --r-lg: 9px;
+  --r-pill: 20px;
+  --title: "Monroe", "Inter", system-ui, sans-serif;
+  --text: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  color-scheme: light;
+}
+.logo-escuro { display: none; }
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0A0A0E;
+    --surface: #131318;
+    --surface-2: #1C1C28;
+    --border: rgba(255, 255, 255, 0.07);
+    --border-pill: rgba(255, 255, 255, 0.12);
+    --border-hover: rgba(255, 255, 255, 0.25);
+    --ink: #E8E6F0;
+    --body: #A09CB8;
+    --muted: #6B6880;
+    --hint: #3D3B52;
+    --v-500: #9D7FF5;
+    --green: #34D399;
+    --red: #F87171;
+    --dp-bg: #1C1C28;
+    --dp-text: rgba(255, 255, 255, 0.40);
+    --dp-value: #E8E6F0;
+    --dp-border-row: rgba(255, 255, 255, 0.06);
+    color-scheme: dark;
+  }
+  .logo-claro { display: none; }
+  .logo-escuro { display: block; }
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--body);
+  font: 300 16px/1.65 var(--text);
+  -webkit-font-smoothing: antialiased;
+}
+::selection { background: rgba(124, 58, 237, 0.18); color: var(--ink); }
+a { color: var(--v-500); text-decoration: none; }
+a:hover { text-decoration: underline; text-underline-offset: 3px; }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+
+.nav {
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  box-shadow: 0 1px 0 0 rgba(100, 90, 130, 0.06);
+}
+.marca { display: flex; align-items: center; gap: 9px; color: var(--ink); font-weight: 500; font-size: 15px; letter-spacing: -0.01em; }
+.marca:hover { text-decoration: none; }
+.marca img { width: 20px; height: 22px; }
+.nav-meta { font-size: 13px; font-weight: 400; color: var(--body); padding: 4px 14px; border-radius: var(--r-pill); border: 1px solid var(--border-pill); }
+
+.wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+
+.palco {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  grid-template-areas: "intro cartao" "lista cartao";
+  column-gap: 72px;
+  align-items: start;
+  padding: 96px 0 112px;
+}
+.intro { grid-area: intro; }
+.lista { grid-area: lista; }
+.cartao { grid-area: cartao; }
+
+.eyebrow { font-size: 12px; font-weight: 500; letter-spacing: 0.10em; text-transform: uppercase; color: var(--muted); margin: 0 0 22px; }
+.eyebrow em { font-style: normal; color: var(--v-500); }
+
+h1, h2 { font-family: var(--title); font-weight: 600; color: var(--ink); letter-spacing: -0.025em; margin: 0; }
+h1 { font-size: clamp(40px, 4.4vw, 56px); line-height: 1.04; }
+h1 .ln { display: block; overflow: hidden; padding-bottom: 0.06em; }
+h1 .ln > span { display: block; }
+h2 { font-size: 26px; line-height: 1.15; }
+
+.lead { font-size: 18px; line-height: 1.6; margin: 26px 0 0; max-width: 32em; }
+
+/* Data: o elemento central */
+.data {
+  margin: 56px 0 0;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  background: var(--dp-bg);
+  border-radius: var(--r-lg);
+  color: var(--dp-value);
+  overflow: hidden;
+}
+.data-dia { padding: 26px 30px; border-right: 1px solid var(--dp-border-row); display: flex; flex-direction: column; justify-content: space-between; min-width: 148px; }
+.data-semana { font-size: 12px; font-weight: 500; letter-spacing: 0.10em; text-transform: uppercase; color: var(--dp-text); }
+.data-num { font-family: var(--title); font-weight: 600; font-size: 72px; line-height: 0.9; letter-spacing: -0.03em; margin: 18px 0 6px; font-variant-numeric: tabular-nums; }
+.data-mes { font-family: var(--title); font-weight: 300; font-size: 22px; letter-spacing: -0.01em; }
+.data-linhas { list-style: none; margin: 0; padding: 14px 28px; }
+.data-linhas li { display: flex; justify-content: space-between; gap: 16px; padding: 11px 0; border-bottom: 1px solid var(--dp-border-row); font-size: 15px; }
+.data-linhas li:last-child { border-bottom: 0; }
+.data-linhas span { color: var(--dp-text); }
+.data-linhas b { font-weight: 400; color: var(--dp-value); text-align: right; }
+
+.inclui { list-style: none; margin: 48px 0 0; padding: 0; }
+.inclui li { display: grid; grid-template-columns: 40px 1fr; gap: 8px; padding: 15px 0; border-top: 1px solid var(--border); font-size: 16px; color: var(--ink); font-weight: 400; line-height: 1.5; }
+.inclui li:last-child { border-bottom: 1px solid var(--border); }
+.inclui .num { font-size: 13px; font-weight: 500; color: var(--v-500); padding-top: 2px; }
+
+/* Formulário */
+.cartao {
+  position: sticky;
+  top: 32px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: 34px;
+}
+.cartao > p { margin: 10px 0 26px; font-size: 15px; }
+
+.campo { margin-bottom: 16px; }
+.campo label, .campo legend { display: block; font-size: 13px; font-weight: 500; color: var(--ink); margin-bottom: 7px; padding: 0; }
+.campo label small, .campo legend small { font-weight: 300; color: var(--muted); font-size: 13px; }
+fieldset.campo { border: 0; margin: 0 0 16px; padding: 0; min-width: 0; }
+
+input[type="text"], input[type="email"], input[type="tel"], textarea {
+  width: 100%;
+  font: 300 16px/1.4 var(--text);
+  color: var(--ink);
+  background: var(--surface);
+  border: 1px solid var(--border-pill);
+  border-radius: 7px;
+  padding: 11px 13px;
+  outline: none;
+  transition: border-color 0.12s;
+}
+textarea { resize: vertical; min-height: 84px; }
+input::placeholder, textarea::placeholder { color: var(--hint); }
+input:hover, textarea:hover { border-color: var(--border-hover); }
+input:focus, textarea:focus { border-color: var(--focus); }
+[aria-invalid="true"] { border-color: var(--red) !important; }
+
+.opcoes { display: flex; flex-wrap: wrap; gap: 6px; }
+.opcoes label { margin: 0; position: relative; }
+.opcoes input { position: absolute; opacity: 0; pointer-events: none; }
+.opcoes span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  padding: 8px 15px;
+  border-radius: var(--r-pill);
+  border: 1px solid var(--border-pill);
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--body);
+  cursor: pointer;
+  transition: border-color 0.12s, color 0.12s, background 0.12s;
+}
+.opcoes span:hover { border-color: var(--border-hover); color: var(--ink); }
+.opcoes input:checked + span { background: var(--surface-2); border-color: var(--ink); color: var(--ink); font-weight: 500; }
+.opcoes input:focus-visible + span { outline: 2px solid var(--focus); outline-offset: 2px; }
+.opcoes[aria-invalid="true"] span { border-color: var(--red); }
+
+.mel { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
+
+.consentimento { display: grid; grid-template-columns: 18px 1fr; gap: 10px; align-items: start; margin: 20px 0 22px; font-size: 13px; line-height: 1.55; cursor: pointer; }
+.consentimento input { width: 16px; height: 16px; margin: 2px 0 0; accent-color: var(--v-600); }
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 48px;
+  font: 500 15px/1 var(--text);
+  padding: 15px 22px;
+  border-radius: var(--r-pill);
+  border: 1px solid var(--v-600);
+  background: var(--v-600);
+  color: #FFFFFF;
+  cursor: pointer;
+  transition: background 0.12s, border-color 0.12s, opacity 0.12s, transform 0.12s;
+}
+.btn:hover { background: #6D28D9; border-color: #6D28D9; }
+.btn:active { transform: scale(0.985); }
+.btn[disabled] { opacity: 0.6; cursor: progress; }
+
+.erro { display: none; margin: 0 0 14px; font-size: 13px; color: var(--red); }
+.erro.ativo { display: block; }
+
+.feito[hidden] { display: none; }
+.feito .ok { width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--border-pill); display: flex; align-items: center; justify-content: center; color: var(--green); margin-bottom: 22px; }
+.feito p { margin: 12px 0 0; font-size: 15px; }
+.feito .resumo { margin-top: 22px; padding: 14px 16px; border-radius: var(--r-md); background: var(--surface-2); font-size: 14px; color: var(--ink); font-weight: 400; }
+
+.privacidade { margin-top: 18px; font-size: 13px; }
+.privacidade summary { cursor: pointer; color: var(--muted); font-weight: 400; }
+.privacidade p { margin: 10px 0 0; }
+
+.rodape { border-top: 1px solid var(--border); padding: 24px 0 40px; font-size: 13px; color: var(--muted); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; }
+.rodape a { color: var(--body); }
+
+.vazio { max-width: 560px; padding: 120px 0; }
+.vazio p { font-size: 17px; margin: 18px 0 0; }
+
+@media (max-width: 900px) {
+  .palco { grid-template-columns: 1fr; grid-template-areas: "intro" "cartao" "lista"; row-gap: 48px; padding: 56px 0 72px; }
+  .inclui { margin-top: 0; }
+  .cartao { position: static; }
+  .data { margin-top: 40px; }
+}
+@media (max-width: 560px) {
+  .nav, .wrap { padding-left: 16px; padding-right: 16px; }
+  .nav-meta { display: none; }
+  h1 { font-size: 36px; }
+  .lead { font-size: 17px; }
+  .cartao { padding: 26px 20px; }
+  .data { grid-template-columns: 1fr; }
+  .data-dia { border-right: 0; border-bottom: 1px solid var(--dp-border-row); flex-direction: row; justify-content: flex-start; align-items: baseline; flex-wrap: wrap; gap: 4px 12px; padding: 22px 20px; }
+  .data-semana { width: 100%; }
+  .data-num { font-size: 56px; margin: 8px 0 0; }
+  .data-linhas { padding: 8px 20px; }
+  .vazio { padding: 72px 0; }
+}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <a class="marca" href="https://povar.pt/">
+    <img class="logo-claro" src="logo.svg" alt="" width="20" height="22">
+    <img class="logo-escuro" src="logo-white.svg" alt="" width="20" height="22">
+    Povar
+  </a>
+  <span class="nav-meta" id="nav-meta">Inscrição</span>
+</header>
+
+<main class="wrap" id="conteudo">
+  <section class="vazio">
+    <p class="eyebrow">Inscrição</p>
+    <h1>A carregar a sessão</h1>
+    <p>Se esta mensagem não desaparecer, escreva para <a href="mailto:hello@povar.pt">hello@povar.pt</a> e fazemos a inscrição por email.</p>
+  </section>
+</main>
+
+<footer class="wrap">
+  <div class="rodape">
+    <span>Povar, Póvoa de Varzim</span>
+    <a href="mailto:hello@povar.pt">hello@povar.pt</a>
+  </div>
+</footer>
+
+<script>
+/*
+  Cada evento é uma entrada em EVENTOS. O link é registo.povar.pt/?e=<chave>.
+  Campos fixos: nome, email, telefone, negócio e consentimento.
+  "perguntas" acrescenta até duas perguntas: tipo "opcoes" (escolha única) ou "texto".
+  estado: "aberto" mostra o formulário; "fechado" mostra a mensagem de inscrições fechadas.
+*/
+var WEBHOOK = 'https://davidecalheiros.app.n8n.cloud/webhook/povar-registo';
+
+var EVENTOS = {
+  'aepvz-restauracao': {
+    estado: 'aberto',
+    eyebrow: 'AEPVZ e Povar <em>· Sessão gratuita</em>',
+    titulo: ['IA na restauração', 'em 30 minutos'],
+    lead: 'Uma sessão online para ver, com exemplos simples, o que a inteligência artificial já faz no dia a dia de um café ou restaurante. No fim, há tempo para perguntas sobre a formação.',
+    data: '2026-11-09',
+    hora: '15h30',
+    onde: 'Online, Google Meet',
+    duracao: '30 minutos',
+    preco: 'Gratuita',
+    inclui: [
+      'Um assistente com a informação do seu negócio, para responder a clientes',
+      'O WhatsApp Business com horários e respostas rápidas',
+      'Melhorar as fotografias dos pratos que já serve',
+      'A ficha de custo de um prato, para perceber a margem'
+    ],
+    perguntas: [
+      { id: 'tipo_negocio', label: 'Tipo de negócio', tipo: 'opcoes', opcoes: ['Café', 'Restaurante', 'Pastelaria', 'Snack-bar', 'Outro'] },
+      { id: 'interesse', label: 'O que gostava de ver na sessão?', tipo: 'texto', opcional: true }
+    ],
+    botao: 'Inscrever-me na sessão',
+    sucesso: 'Vai receber o link da sessão no email indicado. Para entrar, basta um telemóvel ou computador com internet.'
+  }
+};
+
+(function () {
+  var MESES = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];
+  var SEMANA = ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado'];
+  var main = document.getElementById('conteudo');
+  var chave = new URLSearchParams(location.search).get('e') || '';
+  var ev = EVENTOS[chave];
+
+  function esc(s) {
+    return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; });
+  }
+
+  if (!ev) {
+    main.innerHTML = '<section class="vazio"><p class="eyebrow">Inscrição</p><h1>Link sem sessão associada</h1>' +
+      '<p>Confirme o link que recebeu. Se o problema continuar, escreva para <a href="mailto:hello@povar.pt">hello@povar.pt</a> e fazemos a inscrição por email.</p></section>';
+    return;
+  }
+
+  var d = new Date(ev.data + 'T12:00:00');
+  var semana = SEMANA[d.getDay()], dia = d.getDate(), mes = MESES[d.getMonth()];
+  document.title = ev.titulo.join(' ') + ' | Inscrição Povar';
+  document.getElementById('nav-meta').textContent = dia + ' de ' + mes + ', ' + ev.hora;
+
+  var perguntas = (ev.perguntas || []).map(function (p) {
+    var extra = p.opcional ? ' <small>(opcional)</small>' : '';
+    if (p.tipo === 'opcoes') {
+      return '<fieldset class="campo"><legend>' + esc(p.label) + extra + '</legend><div class="opcoes" id="q-' + p.id + '">' +
+        p.opcoes.map(function (o) {
+          return '<label><input type="radio" name="' + p.id + '" value="' + esc(o) + '"><span>' + esc(o) + '</span></label>';
+        }).join('') + '</div></fieldset>';
+    }
+    return '<div class="campo"><label for="q-' + p.id + '">' + esc(p.label) + extra + '</label>' +
+      '<textarea id="q-' + p.id + '" name="' + p.id + '" maxlength="500"></textarea></div>';
+  }).join('');
+
+  var aberto = ev.estado === 'aberto';
+
+  main.innerHTML =
+    '<section class="palco">' +
+      '<div class="intro">' +
+        '<p class="eyebrow" data-a>' + ev.eyebrow + '</p>' +
+        '<h1>' + ev.titulo.map(function (l) { return '<span class="ln"><span>' + esc(l) + '</span></span>'; }).join('') + '</h1>' +
+        '<p class="lead" data-a>' + esc(ev.lead) + '</p>' +
+        '<div class="data" id="data">' +
+          '<div class="data-dia"><span class="data-semana">' + semana + '</span>' +
+            '<span class="data-num" id="data-num">' + String(dia).padStart(2, '0') + '</span>' +
+            '<span class="data-mes">' + mes + '</span></div>' +
+          '<ul class="data-linhas">' +
+            '<li><span>Hora</span><b>' + esc(ev.hora) + '</b></li>' +
+            '<li><span>Onde</span><b>' + esc(ev.onde) + '</b></li>' +
+            '<li><span>Duração</span><b>' + esc(ev.duracao) + '</b></li>' +
+            (ev.preco ? '<li><span>Preço</span><b>' + esc(ev.preco) + '</b></li>' : '') +
+          '</ul>' +
+        '</div>' +
+      '</div>' +
+      (ev.inclui ? '<div class="lista"><ul class="inclui" id="inclui">' + ev.inclui.map(function (t, i) {
+        return '<li><span class="num">' + String(i + 1).padStart(2, '0') + '</span><span>' + esc(t) + '</span></li>';
+      }).join('') + '</ul></div>' : '') +
+      '<div class="cartao" id="cartao">' +
+        (aberto ?
+          '<div id="bloco-form"><h2>Reservar lugar</h2><p>Preencha os dados e recebe o link da sessão por email.</p>' +
+          '<form id="form" novalidate>' +
+            '<div class="campo"><label for="nome">Nome</label><input type="text" id="nome" autocomplete="name" maxlength="80"></div>' +
+            '<div class="campo"><label for="email">Email</label><input type="email" id="email" autocomplete="email" inputmode="email" maxlength="120"></div>' +
+            '<div class="campo"><label for="telefone">Telemóvel <small>(opcional)</small></label><input type="tel" id="telefone" autocomplete="tel" inputmode="tel" maxlength="20"></div>' +
+            '<div class="campo"><label for="negocio">Nome do negócio</label><input type="text" id="negocio" autocomplete="organization" maxlength="100"></div>' +
+            perguntas +
+            '<div class="mel" aria-hidden="true"><label for="website">Website</label><input type="text" id="website" tabindex="-1" autocomplete="off"></div>' +
+            '<label class="consentimento"><input type="checkbox" id="consentimento"><span>Aceito que a Povar guarde estes dados para me enviar o link da sessão e informação sobre a formação.</span></label>' +
+            '<p class="erro" id="erro" role="alert"></p>' +
+            '<button class="btn" type="submit" id="enviar">' + esc(ev.botao || 'Inscrever-me') + '</button>' +
+          '</form></div>' +
+          '<div class="feito" id="feito" hidden tabindex="-1">' +
+            '<div class="ok" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>' +
+            '<h2>Inscrição feita</h2><p>' + esc(ev.sucesso) + '</p>' +
+            '<div class="resumo">' + semana + ', ' + dia + ' de ' + mes + ', às ' + esc(ev.hora) + '</div>' +
+          '</div>'
+        :
+          '<h2>Inscrições fechadas</h2><p>Para saber das próximas sessões, escreva para <a href="mailto:hello@povar.pt">hello@povar.pt</a>.</p>'
+        ) +
+        '<details class="privacidade"><summary>Privacidade</summary><p>Os dados ficam guardados pela Povar, de Davide Calheiros, e não são vendidos nem cedidos para outros fins. Pode pedir para os ver ou apagar em <a href="mailto:hello@povar.pt">hello@povar.pt</a>. Ferramentas usadas: GitHub (alojamento), n8n e Google (registo e envio do email). Esta página não usa cookies.</p></details>' +
+      '</div>' +
+    '</section>';
+
+  if (aberto) ligarFormulario();
+  animar();
+
+  function ligarFormulario() {
+    var form = document.getElementById('form');
+    var erro = document.getElementById('erro');
+    var botao = document.getElementById('enviar');
+    var textoBotao = botao.textContent;
+    var inicio = Date.now();
+
+    function $(id) { return document.getElementById(id); }
+
+    function falha(texto, el) {
+      erro.textContent = texto;
+      erro.classList.add('ativo');
+      el.setAttribute('aria-invalid', 'true');
+      (el.querySelector('input') || el).focus();
+      return false;
+    }
+
+    form.addEventListener('input', function (e) {
+      var alvo = e.target.closest('[aria-invalid]');
+      if (alvo) alvo.removeAttribute('aria-invalid');
+      var grupo = e.target.closest('.opcoes');
+      if (grupo) grupo.removeAttribute('aria-invalid');
+    });
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      erro.classList.remove('ativo');
+
+      var dados = {
+        evento: chave,
+        nome: $('nome').value.trim(),
+        email: $('email').value.trim(),
+        telefone: $('telefone').value.trim(),
+        negocio: $('negocio').value.trim(),
+        website: $('website').value,
+        consentimento: $('consentimento').checked,
+        t: Date.now() - inicio
+      };
+
+      if (dados.nome.length < 2) return falha('Indique o seu nome.', $('nome'));
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(dados.email)) return falha('Confirme o email: parece incompleto.', $('email'));
+      if (dados.telefone && dados.telefone.replace(/\D/g, '').length < 9) return falha('Confirme o telemóvel: precisa de 9 algarismos.', $('telefone'));
+      if (dados.negocio.length < 2) return falha('Indique o nome do negócio.', $('negocio'));
+
+      for (var i = 0; i < (ev.perguntas || []).length; i++) {
+        var p = ev.perguntas[i];
+        if (p.tipo === 'opcoes') {
+          var marcada = form.querySelector('input[name="' + p.id + '"]:checked');
+          if (!marcada && !p.opcional) return falha('Escolha uma opção em "' + p.label + '".', $('q-' + p.id));
+          dados[p.id] = marcada ? marcada.value : '';
+        } else {
+          dados[p.id] = $('q-' + p.id).value.trim();
+          if (!dados[p.id] && !p.opcional) return falha('Responda a "' + p.label + '".', $('q-' + p.id));
+        }
+      }
+
+      if (!dados.consentimento) return falha('Para concluir, aceite a caixa acima.', $('consentimento'));
+
+      botao.disabled = true;
+      botao.textContent = 'A enviar...';
+
+      var controlo = typeof AbortController === 'function' ? new AbortController() : null;
+      var limite = setTimeout(function () { if (controlo) controlo.abort(); }, 10000);
+
+      fetch(WEBHOOK, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain;charset=UTF-8' },
+        body: JSON.stringify(dados),
+        signal: controlo ? controlo.signal : undefined
+      }).then(function (res) {
+        clearTimeout(limite);
+        if (!res.ok) throw new Error(res.status);
+        mostrarFeito();
+      }).catch(function () {
+        clearTimeout(limite);
+        botao.disabled = false;
+        botao.textContent = textoBotao;
+        erro.innerHTML = 'Não foi possível enviar a inscrição. Tente de novo dentro de um minuto ou escreva para <a href="mailto:hello@povar.pt">hello@povar.pt</a>.';
+        erro.classList.add('ativo');
+      });
+    });
+
+    function mostrarFeito() {
+      var bloco = $('bloco-form'), feito = $('feito');
+      var trocar = function () { bloco.hidden = true; feito.hidden = false; feito.focus({ preventScroll: true }); };
+      if (!window.gsap || matchMedia('(prefers-reduced-motion: reduce)').matches) return trocar();
+      gsap.to(bloco, { autoAlpha: 0, y: -12, duration: 0.24, ease: 'power2.in', onComplete: function () {
+        trocar();
+        gsap.from(feito.children, { autoAlpha: 0, y: 16, duration: 0.7, ease: 'expo.out', stagger: 0.07 });
+      } });
+    }
+  }
+
+  function animar() {
+    if (!window.gsap) return;
+    gsap.registerPlugin(ScrollTrigger);
+    var mm = gsap.matchMedia();
+    mm.add({ ok: '(prefers-reduced-motion: no-preference)' }, function () {
+      var tl = gsap.timeline({ defaults: { ease: 'expo.out' } });
+      tl.from('[data-a]:first-child', { autoAlpha: 0, y: 12, duration: 0.7 }, 0.05)
+        .from('h1 .ln > span', { yPercent: 115, duration: 1.1, stagger: 0.09 }, 0.12)
+        .from('.lead', { autoAlpha: 0, y: 20, duration: 0.9 }, 0.36)
+        .from('#cartao', { autoAlpha: 0, y: 28, duration: 1 }, 0.3);
+
+      // Momento de assinatura: o bloco da data abre como uma janela e o dia assenta no lugar.
+      var data = gsap.timeline({ scrollTrigger: { trigger: '#data', start: 'top 92%', once: true }, delay: 0.45 });
+      data.fromTo('#data', { clipPath: 'inset(0% 100% 0% 0% round 9px)' }, { clipPath: 'inset(0% 0% 0% 0% round 9px)', duration: 1.1, ease: 'expo.inOut' })
+        .from('#data-num', { yPercent: 60, autoAlpha: 0, duration: 0.9, ease: 'expo.out' }, '-=0.45')
+        .from('.data-linhas li', { autoAlpha: 0, x: -12, duration: 0.6, ease: 'expo.out', stagger: 0.07 }, '<');
+
+      if (document.getElementById('inclui')) {
+        gsap.from('#inclui li', { autoAlpha: 0, y: 16, duration: 0.8, ease: 'expo.out', stagger: 0.07,
+          scrollTrigger: { trigger: '#inclui', start: 'top 88%', once: true } });
+      }
+    });
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { ScrollTrigger.refresh(); });
+  }
+})();
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+</body>
+</html>
